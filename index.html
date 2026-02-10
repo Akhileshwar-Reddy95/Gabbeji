@@ -1,0 +1,857 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valentine Surprise 💘</title>
+  <meta name="description" content="A playful + grand Valentine surprise page" />
+
+  <style>
+    :root{
+      --bg1:#0b0b14;
+      --bg2:#19102a;
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --pink:#ff4fd8;
+      --red:#ff3b5c;
+      --gold:#ffcf66;
+      --good:#38ef7d;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      overflow-x:hidden;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(255,79,216,.18), transparent 60%),
+                  radial-gradient(1000px 600px at 90% 30%, rgba(255,59,92,.14), transparent 60%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
+
+    /* floating hearts background */
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; opacity:.9;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+    }
+    .heart{
+      position:absolute;
+      font-size: 18px;
+      animation: floatUp linear infinite;
+      opacity: .0;
+    }
+    @keyframes floatUp{
+      0%   { transform: translateY(30px) translateX(0) scale(.8) rotate(-8deg); opacity:0; }
+      10%  { opacity:.65; }
+      80%  { opacity:.65; }
+      100% { transform: translateY(-120vh) translateX(120px) scale(1.35) rotate(10deg); opacity:0; }
+    }
+
+    header{
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: rgba(10,10,20,.45);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      z-index:50;
+    }
+    .nav{
+      max-width:1100px; margin:0 auto;
+      padding:12px 18px;
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      color:var(--muted);
+    }
+    .nav a{
+      color:var(--muted); text-decoration:none;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:10px;
+      transition: .2s ease;
+    }
+    .nav a:hover{ background: rgba(255,255,255,.08); color:var(--text); }
+
+    main{ max-width:1100px; margin:0 auto; padding:18px; }
+    section{ margin: 22px 0 44px; }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--stroke);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+    .heroLeft{
+      padding:26px 24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .glow{
+      position:absolute; inset:-60px -60px auto auto;
+      width:220px; height:220px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,79,216,.55), transparent 65%);
+      filter: blur(1px);
+      transform: rotate(10deg);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    @media (max-width: 520px){
+      h1{ font-size:36px; }
+    }
+    .sub{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width: 52ch;
+    }
+    .actions{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    button, .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight:700;
+      color: #0b0b14;
+      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      user-select:none;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      color: #0b0b14;
+    }
+    .btnGhost{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+    }
+    .btnGold{
+      background: linear-gradient(135deg, var(--gold), #ffdca0);
+    }
+    .tiny{
+      font-size:12px; color:var(--muted);
+    }
+
+    .heroRight{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .mini{
+      padding:16px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+    }
+    .miniTitle{ font-weight:800; margin:0 0 8px; }
+    .miniText{ margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 900px){ .grid3{ grid-template-columns: 1fr; } }
+    .tile{
+      padding:16px;
+      border-radius:18px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .tile h3{ margin:0 0 6px; }
+    .tile p{ margin:0; color:var(--muted); font-size:13px; line-height:1.6; }
+
+    .divider{
+      height:1px; background: rgba(255,255,255,.1);
+      margin: 18px 0;
+    }
+
+    .centerTitle{
+      display:flex; align-items:end; justify-content:space-between; gap:10px;
+      margin-bottom: 10px;
+    }
+    .centerTitle h2{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.4px;
+    }
+
+    /* Quiz */
+    .quizWrap{ padding:18px; }
+    .q{
+      padding:14px;
+      border-radius:16px;
+      background: rgba(0,0,0,.2);
+      border:1px solid rgba(255,255,255,.1);
+      margin:10px 0;
+    }
+    .q strong{ display:block; margin-bottom:8px; }
+    .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+    .opt{
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 14px;
+      font-weight:700;
+      font-size:13px;
+    }
+    .opt.selected{
+      background: rgba(56,239,125,.18);
+      border-color: rgba(56,239,125,.35);
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 900px){ .gallery{ grid-template-columns: repeat(2, 1fr);} }
+    .shot{
+      position:relative;
+      overflow:hidden;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      cursor:pointer;
+      aspect-ratio: 1 / 1;
+    }
+    .shot img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.03);
+      transition: transform .25s ease;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .shot:hover img{ transform: scale(1.08); }
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding:18px;
+    }
+    .modal.open{ display:flex; }
+    .modalInner{
+      max-width: 980px;
+      width:100%;
+      background: rgba(15,15,25,.92);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .modalInner img{
+      width:100%;
+      max-height: 80vh;
+      object-fit:contain;
+      display:block;
+      background: rgba(0,0,0,.35);
+    }
+    .close{
+      position:absolute; top:10px; right:10px;
+      border-radius: 14px;
+      padding:10px 12px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      font-weight:800;
+    }
+
+    /* Reveal */
+    .reveal{
+      padding:22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .reveal h2{ margin:0 0 10px; font-size:30px; }
+    .big{
+      font-size:16px;
+      color: var(--muted);
+      line-height:1.75;
+      max-width: 62ch;
+      margin: 0 auto 14px;
+    }
+    .secretBox{
+      margin: 14px auto 0;
+      max-width: 760px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      text-align:left;
+    }
+    .secretBox strong{ color: #fff; }
+    .hint{ color: var(--muted); font-size: 12px; }
+
+    footer{
+      padding: 30px 18px 45px;
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size:12px;
+    }
+
+    /* The “No” button trick */
+    .noBtn{
+      position:relative;
+    }
+
+    /* Confetti canvas */
+    #confetti{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index: 998;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="confetti"></canvas>
+
+  <div class="hearts" id="hearts"></div>
+
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <span style="font-size:18px">💘</span>
+        <span>For <span id="herNameNav">Her</span></span>
+        <span class="pill" id="datePill">Valentine Mode</span>
+      </div>
+      <nav style="display:flex; gap:6px; align-items:center;">
+        <a href="#quiz">Quiz</a>
+        <a href="#memories">Memories</a>
+        <a href="#reveal">Final Reveal</a>
+        <button class="btnGhost" id="musicBtn" title="Toggle music">🎵 Music: Off</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card heroLeft">
+        <div class="glow"></div>
+        <h1>
+          Hi <span id="herName">Soumya</span> 👀<br/>
+          I built you a tiny universe.
+        </h1>
+        <p class="sub">
+          This is not a normal Valentine page. It’s a playful little “game” that ends with a grand surprise.
+          Ready? Don’t scroll too fast 😄
+        </p>
+
+        <div class="actions">
+          <button class="btnPrimary" id="startBtn">Start the Surprise ✨</button>
+          <button class="btnGhost" id="valBtnYes">Yes, I’m your Valentine 💖</button>
+          <button class="btnGhost noBtn" id="valBtnNo">No 🙃</button>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="grid3">
+          <div class="tile">
+            <h3>🎯 Mission</h3>
+            <p>Finish the quiz, unlock the reveal, and claim your prize.</p>
+          </div>
+          <div class="tile">
+            <h3>🧠 Difficulty</h3>
+            <p>Easy. Because you’re the genius here. I’m just the simp with a keyboard.</p>
+          </div>
+          <div class="tile">
+            <h3>🔒 Privacy</h3>
+            <p>It’s just a link. No login. No data stored. Only vibes.</p>
+          </div>
+        </div>
+
+        <p class="tiny" style="margin-top:14px;">
+          Tip: If you’re viewing this at dinner, turn on music 😉
+        </p>
+      </div>
+
+      <div class="card heroRight">
+        <div class="mini">
+          <p class="miniTitle">💌 A note from <span id="yourName1">Rohit</span></p>
+          <p class="miniText" id="noteText">
+            I wanted to do something that feels “us” — fun, personal, and a little extra.
+            So I made this. Keep going till the end.
+          </p>
+        </div>
+
+        <div class="mini">
+          <p class="miniTitle">⏳ Countdown (manual)</p>
+          <p class="miniText">
+            Tonight’s surprise unlocks when you press <b>Final Reveal</b>.
+          </p>
+          <p class="miniText hint">You can replace this with a real countdown if you want later.</p>
+        </div>
+
+        <div class="mini">
+          <p class="miniTitle">🗺️ “Us” highlights</p>
+          <p class="miniText" id="highlights">
+            • First inside joke: <b>“____”</b><br/>
+            • Our song: <b>“____”</b><br/>
+            • Favorite thing about you: <b>“____”</b>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="card quizWrap">
+      <div class="centerTitle">
+        <h2>🎮 Mini Relationship Quiz</h2>
+        <span class="pill" id="scorePill">Score: 0/3</span>
+      </div>
+      <p class="sub" style="margin-top:0">
+        Answer these 3 questions to unlock the final surprise button.
+      </p>
+
+      <div class="q" data-q="0">
+        <strong>1) What’s my favorite way to annoy you?</strong>
+        <div class="opts">
+          <button class="opt" data-correct="0">Stealing your fries</button>
+          <button class="opt" data-correct="1">Saying “one last thing…” 17 times</button>
+          <button class="opt" data-correct="0">Sending 9 voice notes</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="1">
+        <strong>2) Pick our vibe:</strong>
+        <div class="opts">
+          <button class="opt" data-correct="0">CEO & CFO energy</button>
+          <button class="opt" data-correct="1">Best friends who flirt</button>
+          <button class="opt" data-correct="0">Two characters in a rom-com</button>
+        </div>
+      </div>
+
+      <div class="q" data-q="2">
+        <strong>3) What’s the correct answer to “Do you know how much I love you?”</strong>
+        <div class="opts">
+          <button class="opt" data-correct="0">Normal amount</button>
+          <button class="opt" data-correct="0">Not sure</button>
+          <button class="opt" data-correct="1">Infinity. And then some.</button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btnGold" id="unlockBtn" disabled title="Finish the quiz first">
+          🔓 Unlock Final Reveal
+        </button>
+        <span class="tiny" id="unlockHint">Finish all 3 to unlock.</span>
+      </div>
+    </section>
+
+    <!-- MEMORIES -->
+    <section id="memories" class="card" style="padding:18px;">
+      <div class="centerTitle">
+        <h2>📸 Our Memories</h2>
+        <span class="pill">Tap a photo</span>
+      </div>
+      <p class="sub" style="margin-top:0">
+        Add your best photos here. (I’ll show you how below.)
+      </p>
+
+      <div class="gallery" id="gallery">
+        <!-- Replace these placeholders with your own images in /photos/ -->
+        <div class="shot"><img alt="Memory 1" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 2" src="https://images.unsplash.com/photo-1523438097201-512ae7d59c0b?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 3" src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 4" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 5" src="https://images.unsplash.com/photo-1520975869010-95d54f5f1c56?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 6" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 7" src="https://images.unsplash.com/photo-1526045431048-f857369baa09?auto=format&fit=crop&w=800&q=60"></div>
+        <div class="shot"><img alt="Memory 8" src="https://images.unsplash.com/photo-1520942702018-0862200e6873?auto=format&fit=crop&w=800&q=60"></div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="grid3">
+        <div class="tile">
+          <h3>💖 Reasons I love you</h3>
+          <p id="reasons">
+            • You make chaos feel calm.<br/>
+            • Your laugh = my favorite sound.<br/>
+            • You believe in me even when I’m dramatic.
+          </p>
+        </div>
+        <div class="tile">
+          <h3>🧠 Inside jokes</h3>
+          <p id="jokes">
+            • “_____”<br/>
+            • “_____”<br/>
+            • That one moment in the car 😄
+          </p>
+        </div>
+        <div class="tile">
+          <h3>🧭 Next adventure</h3>
+          <p id="nextAdventure">
+            • A date night with a view<br/>
+            • One surprise stop before dessert<br/>
+            • You in my hoodie, as usual
+          </p>
+        </div>
+      </div>
+
+      <p class="tiny" style="margin-top:14px;">
+        Want a “timeline” section too? Tell me and I’ll add it.
+      </p>
+    </section>
+
+    <!-- REVEAL -->
+    <section id="reveal" class="card reveal">
+      <h2>🎁 Final Reveal</h2>
+      <p class="big">
+        This button stays locked until you finish the quiz.
+        When it unlocks… don’t scream. (Actually scream. I like that.)
+      </p>
+
+      <div class="actions" style="justify-content:center;">
+        <button class="btnPrimary" id="revealBtn" disabled>Open the Surprise 💥</button>
+      </div>
+
+      <div class="secretBox" id="secretBox" style="display:none;">
+        <p style="margin:0 0 8px;">
+          <strong>Surprise Plan:</strong>
+          <span id="surpriseText">
+            Tonight, I’m taking you to <b>[PLACE WITH VIEW]</b>. After that, we’re doing <b>[SURPRISE THING]</b>.
+            And yes… I’ve been planning this like a villain with a good heart.
+          </span>
+        </p>
+        <p style="margin:0;">
+          <strong>Dress code:</strong> <span id="dressCode">Cute + confident 💃</span><br/>
+          <strong>Time:</strong> <span id="timeText">11:30 PM</span><br/>
+          <strong>One rule:</strong> <span id="ruleText">No checking my phone 😄</span>
+        </p>
+        <p class="hint" style="margin-top:10px;">
+          (You can edit this text in the code — I’ll tell you exactly where.)
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Made with love, mischief, and an unreasonable amount of overthinking 💘
+  </footer>
+
+  <!-- Image Modal -->
+  <div class="modal" id="modal">
+    <div class="modalInner">
+      <button class="close" id="closeModal">✕ Close</button>
+      <img id="modalImg" alt="Expanded memory">
+    </div>
+  </div>
+
+  <!-- Optional audio (replace music.mp3 with your own) -->
+  <audio id="bgm" loop>
+    <!-- If you want local audio: create /music/music.mp3 and use:
+         <source src="music/music.mp3" type="audio/mpeg"> -->
+  </audio>
+
+  <script>
+    /***************
+     * QUICK CUSTOMIZE
+     ***************/
+    const CONFIG = {
+      herName: "Soumya",          // <-- change this
+      yourName: "Rohit",          // <-- change this
+      dateLabel: "Valentine Surprise 💘", // <-- change this
+      noteText: "I wanted something fun, personal, and a little extra. So I built this. Finish it till the end 😄",
+      highlightsHTML: `
+        • First inside joke: <b>“____”</b><br/>
+        • Our song: <b>“____”</b><br/>
+        • Favorite thing about you: <b>“____”</b>
+      `,
+      // Final reveal details
+      reveal: {
+        place: "[PLACE WITH VIEW]",
+        surprise: "[SURPRISE THING]",
+        dressCode: "Cute + confident 💃",
+        time: "11:30 PM",
+        rule: "No checking my phone 😄"
+      }
+    };
+
+    // Apply config to UI
+    document.getElementById("herName").textContent = CONFIG.herName;
+    document.getElementById("herNameNav").textContent = CONFIG.herName;
+    document.getElementById("yourName1").textContent = CONFIG.yourName;
+    document.getElementById("datePill").textContent = CONFIG.dateLabel;
+    document.getElementById("noteText").textContent = CONFIG.noteText;
+    document.getElementById("highlights").innerHTML = CONFIG.highlightsHTML;
+
+    /***************
+     * FLOATING HEARTS
+     ***************/
+    const heartsWrap = document.getElementById("hearts");
+    const heartEmojis = ["💗","💖","💘","💝","💞","💕","❤️"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+      const left = Math.random()*100;
+      const dur = 8 + Math.random()*10;
+      const size = 14 + Math.random()*18;
+      h.style.left = left + "vw";
+      h.style.bottom = "-40px";
+      h.style.fontSize = size + "px";
+      h.style.animationDuration = dur + "s";
+      h.style.animationDelay = (Math.random()*2) + "s";
+      heartsWrap.appendChild(h);
+      setTimeout(()=> h.remove(), (dur+3)*1000);
+    }
+    for(let i=0;i<18;i++) setTimeout(spawnHeart, i*250);
+    setInterval(spawnHeart, 650);
+
+    /***************
+     * START BUTTON SCROLL
+     ***************/
+    document.getElementById("startBtn").addEventListener("click", ()=>{
+      document.getElementById("quiz").scrollIntoView({behavior:"smooth", block:"start"});
+      burstConfetti();
+    });
+
+    /***************
+     * "NO" BUTTON RUNS AWAY
+     ***************/
+    const noBtn = document.getElementById("valBtnNo");
+    let noMoves = 0;
+    function moveNoBtn(){
+      noMoves++;
+      const dx = (Math.random()*220 - 110);
+      const dy = (Math.random()*140 - 70);
+      noBtn.style.transform = `translate(${dx}px, ${dy}px) rotate(${(Math.random()*10-5)}deg)`;
+      if(noMoves >= 6){
+        noBtn.textContent = "Okay fine 😭";
+      }
+    }
+    noBtn.addEventListener("mouseenter", moveNoBtn);
+    noBtn.addEventListener("click", moveNoBtn);
+
+    document.getElementById("valBtnYes").addEventListener("click", ()=>{
+      burstConfetti();
+      alert(`Yay 😄 Officially locked in, ${CONFIG.herName} 💖`);
+    });
+
+    /***************
+     * QUIZ LOGIC
+     ***************/
+    const scorePill = document.getElementById("scorePill");
+    const unlockBtn = document.getElementById("unlockBtn");
+    const unlockHint = document.getElementById("unlockHint");
+    const revealBtn = document.getElementById("revealBtn");
+
+    const answers = [null, null, null]; // store correct selection per question
+    function updateScore(){
+      const score = answers.filter(Boolean).length;
+      scorePill.textContent = `Score: ${score}/3`;
+      const done = answers.every(v => v !== null);
+      const perfect = answers.every(v => v === true);
+
+      unlockBtn.disabled = !(done && perfect);
+      unlockBtn.title = unlockBtn.disabled ? "Get all correct to unlock 😄" : "Unlocked!";
+      unlockHint.textContent = done
+        ? (perfect ? "Perfect score 😤 ✅" : "So close… try again for 3/3 😄")
+        : "Finish all 3 to unlock.";
+
+      // Reveal also depends on unlock
+      revealBtn.disabled = unlockBtn.disabled;
+    }
+
+    document.querySelectorAll(".q").forEach(qEl=>{
+      const qIndex = Number(qEl.dataset.q);
+      qEl.querySelectorAll(".opt").forEach(opt=>{
+        opt.addEventListener("click", ()=>{
+          // clear previous selections
+          qEl.querySelectorAll(".opt").forEach(o=> o.classList.remove("selected"));
+          opt.classList.add("selected");
+
+          const isCorrect = opt.dataset.correct === "1";
+          answers[qIndex] = isCorrect;
+
+          updateScore();
+          if(isCorrect) burstConfetti(35);
+        });
+      });
+    });
+
+    unlockBtn.addEventListener("click", ()=>{
+      burstConfetti();
+      document.getElementById("reveal").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    /***************
+     * REVEAL
+     ***************/
+    const secretBox = document.getElementById("secretBox");
+    document.getElementById("revealBtn").addEventListener("click", ()=>{
+      // Populate reveal text
+      document.getElementById("surpriseText").innerHTML =
+        `Tonight, I’m taking you to <b>${CONFIG.reveal.place}</b>. After that, we’re doing <b>${CONFIG.reveal.surprise}</b>. ` +
+        `And yes… I planned this like a villain with a soft heart.`;
+
+      document.getElementById("dressCode").textContent = CONFIG.reveal.dressCode;
+      document.getElementById("timeText").textContent = CONFIG.reveal.time;
+      document.getElementById("ruleText").textContent = CONFIG.reveal.rule;
+
+      secretBox.style.display = "block";
+      burstConfetti(220);
+      pulseTitle("🎁 Surprise Unlocked!");
+    });
+
+    function pulseTitle(text){
+      const pill = document.getElementById("datePill");
+      pill.textContent = text;
+      pill.style.background = "rgba(56,239,125,.18)";
+      pill.style.borderColor = "rgba(56,239,125,.35)";
+      setTimeout(()=>{
+        pill.textContent = CONFIG.dateLabel;
+        pill.style.background = "rgba(255,255,255,.08)";
+        pill.style.borderColor = "rgba(255,255,255,.12)";
+      }, 3000);
+    }
+
+    /***************
+     * GALLERY MODAL
+     ***************/
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    document.getElementById("closeModal").addEventListener("click", ()=> modal.classList.remove("open"));
+    modal.addEventListener("click", (e)=> { if(e.target === modal) modal.classList.remove("open"); });
+
+    document.querySelectorAll(".shot img").forEach(img=>{
+      img.addEventListener("click", ()=>{
+        modalImg.src = img.src;
+        modal.classList.add("open");
+      });
+    });
+
+    /***************
+     * MUSIC TOGGLE (optional)
+     ***************/
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+    let musicOn = false;
+
+    musicBtn.addEventListener("click", async ()=>{
+      // If you add your own mp3 source, this will work.
+      // Browsers require user interaction to start audio.
+      if(!bgm.querySelector("source")){
+        alert("Add your music file first (instructions in code). Then this button will work 🎵");
+        return;
+      }
+      try{
+        if(!musicOn){
+          await bgm.play();
+          musicOn = true;
+          musicBtn.textContent = "🎵 Music: On";
+          burstConfetti(40);
+        } else {
+          bgm.pause();
+          musicOn = false;
+          musicBtn.textContent = "🎵 Music: Off";
+        }
+      }catch(err){
+        console.log(err);
+        alert("Audio blocked by browser. Try clicking again.");
+      }
+    });
+
+    /***************
+     * CONFETTI (simple canvas)
+     ***************/
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let W, H;
+    function resize(){
+      W = canvas.width = window.innerWidth * devicePixelRatio;
+      H = canvas.height = window.innerHeight * devicePixelRatio;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    let particles = [];
+    function burstConfetti(count=120){
+      const c = count;
+      const cx = W/2, cy = H/3;
+      for(let i=0;i<c;i++){
+        particles.push({
+          x: cx + (Math.random()*140-70)*devicePixelRatio,
+          y: cy + (Math.random()*80-40)*devicePixelRatio,
+          vx: (Math.random()*8-4)*devicePixelRatio,
+          vy: (Math.random()*-10-3)*devicePixelRatio,
+          g: (0.18 + Math.random()*0.18)*devicePixelRatio,
+          r: (2 + Math.random()*4)*devicePixelRatio,
+          a: 1,
+          rot: Math.random()*Math.PI,
+          vr: (Math.random()*0.2-0.1)
+        });
+      }
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      particles = particles.filter(p => p.a > 0);
+      for(const p of particles){
+        p.vy += p.g;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.a -= 0.008;
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(p.a,0);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = "white"; // keep it simple (you can change if you want)
+        ctx.fillRect(-p.r*2, -p.r, p.r*4, p.r*2);
+        ctx.restore();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    // Initial tiny confetti for vibes
+    setTimeout(()=> burstConfetti(25), 900);
+  </script>
+</body>
+</html>
