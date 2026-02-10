@@ -421,13 +421,13 @@
           <p class="miniText">
             The surprise unlocks when you press <b>Final Reveal</b>.
           </p>
-          <p class="miniText hint">Want a real countdown? Tell me and I’ll add it.</p>
+          <p class="miniText hint">Want a real countdown? Hatt Ghendu.</p>
         </div>
 
         <div class="mini">
           <p class="miniTitle">🗺️ “Us” highlights</p>
           <p class="miniText" id="highlights">
-            • Our intense sessions 💭<br/>
+            • Our intense sessions, hehehe :p 💭<br/>
             • Our parties & chaos mode 🎉<br/>
             • Car rides with music 🚗🎶<br/>
             • Office moments only we understand 😄
@@ -449,18 +449,18 @@
       <div class="q" data-q="0">
         <strong>1) What’s my favorite way to annoy you?</strong>
         <div class="opts">
-          <button class="opt" data-correct="0">Stealing your fries</button>
-          <button class="opt" data-correct="1">Saying “one last thing…” 17 times</button>
-          <button class="opt" data-correct="0">Sending 9 voice notes</button>
+          <button class="opt" data-correct="0">Asking Aur Gabbe ji</button>
+          <button class="opt" data-correct="1">Calling you Ghendu</button>
+          <button class="opt" data-correct="0">Giving you more and more work</button>
         </div>
       </div>
 
       <div class="q" data-q="1">
         <strong>2) Pick our vibe:</strong>
         <div class="opts">
-          <button class="opt" data-correct="0">CEO & CFO energy</button>
-          <button class="opt" data-correct="1">Best friends who flirt</button>
-          <button class="opt" data-correct="0">Two characters in a rom-com</button>
+          <button class="opt" data-correct="0">Colleague energy</button>
+          <button class="opt" data-correct="1">Talli houke backchodi karna</button>
+          <button class="opt" data-correct="0">Chu chap kaam karlena</button>
         </div>
       </div>
 
@@ -518,23 +518,23 @@
         <div class="tile">
           <h3>🧠 Inside jokes</h3>
           <p id="jokes">
-            • “One last thing…” (and it’s never last) 😄<br/>
+            • Har jagah dalna :p 😄<br/>
             • Our party stories that should never leave us 🤫<br/>
             • That one car ride playlist moment 🎶
           </p>
         </div>
         <div class="tile">
           <h3>🧭 Next adventure</h3>
-          <p id="nextAdventure">
-            • My next visit to India 🇮🇳<br/>
-            • Time together, no rushing<br/>
-            • A plan I’m not telling you yet 😈
+          <p id="Aur Gabbe ji">
+            • Aur kya hi boulu<br/>
+            • Rou ne ka nahi, oki?<br/>
+            • acche bacche ke jaise rehna
           </p>
         </div>
       </div>
 
       <p class="tiny" style="margin-top:14px;">
-        If you want, I can add a “timeline of us” section too (super romantic).
+        Oh maa, gabbe ji itna dur pahunch gaye, hehehe.
       </p>
     </section>
 
@@ -557,8 +557,8 @@
         </p>
         <p style="margin:0;">
           <strong>Dress code:</strong> <span id="dressCode">Your usual stunning self ✨</span><br/>
-          <strong>When:</strong> <span id="timeText">When I land 😉</span><br/>
-          <strong>One rule:</strong> <span id="ruleText">You don’t get to overthink this 😄</span>
+          <strong>When:</strong> <span id="timeText">When I am there 😉</span><br/>
+          <strong>One rule:</strong> <span id="ruleText">You don’t get to overthink this - khali aake jaane ka with marks all over 😄</span>
         </p>
         <p class="hint" style="margin-top:10px;">
           (Yes, I’m being dramatic on purpose.)
@@ -581,14 +581,9 @@
   </div>
 
   <!-- Optional audio -->
-  <audio id="bgm" loop>
-    <!-- To enable music:
-         1) Create a folder named "music"
-         2) Upload your MP3 as "music.mp3" inside it
-         3) Uncomment the line below -->
-    <source src="music/music.mp3" type="audio/mpeg">
-  </audio>
-
+  <audio id="bgm" loop preload="auto">
+  <source src="music/music.mp3" type="audio/mpeg">
+</audio>
   <script>
     /***************
      * QUICK CUSTOMIZE (already set for you)
@@ -725,7 +720,7 @@
     const secretBox = document.getElementById("secretBox");
     document.getElementById("revealBtn").addEventListener("click", ()=>{
       document.getElementById("surpriseText").innerHTML =
-        `When I’m in India next, I’m stealing you for something special. <b>No rushing, no distractions.</b> ` +
+        `When I’m in India next, I’ll steal you for a special night. <b>No rushing, no distractions.</b> ` +
         `Just us — and a plan I’m not telling you yet 😈`;
 
       document.getElementById("dressCode").textContent = CONFIG.reveal.dressCode;
