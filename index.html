@@ -763,31 +763,34 @@
      * MUSIC TOGGLE (optional)
      ***************/
     const bgm = document.getElementById("bgm");
-    const musicBtn = document.getElementById("musicBtn");
-    let musicOn = false;
+const musicBtn = document.getElementById("musicBtn");
 
-    musicBtn.addEventListener("click", async ()=>{
-      if(!bgm.querySelector("source")){
-        alert("To enable music: upload music/music.mp3 and uncomment the <source> line in the code 🎵");
-        return;
-      }
-      try{
-        if(!musicOn){
-          await bgm.play();
-          musicOn = true;
-          musicBtn.textContent = "🎵 Music: On";
-          burstConfetti(40);
-        } else {
-          bgm.pause();
-          musicOn = false;
-          musicBtn.textContent = "🎵 Music: Off";
-        }
-      }catch(err){
-        console.log(err);
-        alert("Audio blocked by browser. Try clicking again.");
-      }
+bgm.volume = 1;
+bgm.muted = false;
+
+musicBtn.onclick = function () {
+
+  // Force browser to load audio
+  bgm.load();
+
+  const playPromise = bgm.play();
+
+  if (playPromise !== undefined) {
+
+    playPromise.then(() => {
+
+      musicBtn.textContent = "🎵 Music: On";
+      burstConfetti(40);
+
+    }).catch(() => {
+
+      alert("Click once more 🙂 Browser security requires interaction");
+
     });
 
+  }
+
+};
     /***************
      * CONFETTI (simple canvas)
      ***************/
