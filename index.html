@@ -1,221 +1,851 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akhil ❤️ Anubhuti</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Akhil ❤️ Anubhuti</title>
+  <meta name="description" content="A playful + grand Valentine surprise page" />
 
-<style>
+  <style>
+    :root{
+      --bg1:#0b0b14;
+      --bg2:#19102a;
+      --card: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --pink:#ff4fd8;
+      --red:#ff3b5c;
+      --gold:#ffcf66;
+      --good:#38ef7d;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      overflow-x:hidden;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(255,79,216,.18), transparent 60%),
+                  radial-gradient(1000px 600px at 90% 30%, rgba(255,59,92,.14), transparent 60%),
+                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      min-height:100vh;
+    }
 
-body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    color:white;
-    background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
-    overflow-x:hidden;
-}
+    /* floating hearts background */
+    .hearts{
+      position:fixed; inset:0; pointer-events:none; opacity:.9;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+    }
+    .heart{
+      position:absolute;
+      font-size: 18px;
+      animation: floatUp linear infinite;
+      opacity: .0;
+    }
+    @keyframes floatUp{
+      0%   { transform: translateY(30px) translateX(0) scale(.8) rotate(-8deg); opacity:0; }
+      10%  { opacity:.65; }
+      80%  { opacity:.65; }
+      100% { transform: translateY(-120vh) translateX(120px) scale(1.35) rotate(10deg); opacity:0; }
+    }
 
-/* Floating hearts */
-.heart{
-    position:fixed;
-    font-size:18px;
-    animation: float 8s linear infinite;
-    opacity:0.6;
-}
-@keyframes float{
-    from{transform:translateY(100vh)}
-    to{transform:translateY(-10vh)}
-}
+    header{
+      position:sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: rgba(10,10,20,.45);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      z-index:50;
+    }
+    .nav{
+      max-width:1100px; margin:0 auto;
+      padding:12px 18px;
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .pill{
+      font-size:12px;
+      padding:6px 10px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      color:var(--muted);
+    }
+    .nav a{
+      color:var(--muted); text-decoration:none;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:10px;
+      transition: .2s ease;
+    }
+    .nav a:hover{ background: rgba(255,255,255,.08); color:var(--text); }
 
-/* Sections */
-section{
-    max-width:900px;
-    margin:auto;
-    padding:40px 20px;
-}
+    main{ max-width:1100px; margin:0 auto; padding:18px; }
+    section{ margin: 22px 0 44px; }
 
-.card{
-    background:rgba(255,255,255,0.07);
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.4);
-}
+    .hero{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+    }
 
-button{
-    border:none;
-    padding:12px 16px;
-    margin:8px;
-    border-radius:12px;
-    font-weight:bold;
-    cursor:pointer;
-}
+    .card{
+      background: var(--card);
+      border:1px solid var(--stroke);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+    .heroLeft{
+      padding:26px 24px;
+      position:relative;
+      overflow:hidden;
+    }
+    .glow{
+      position:absolute; inset:-60px -60px auto auto;
+      width:220px; height:220px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,79,216,.55), transparent 65%);
+      filter: blur(1px);
+      transform: rotate(10deg);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:44px;
+      line-height:1.05;
+      letter-spacing:-.7px;
+    }
+    @media (max-width: 520px){
+      h1{ font-size:36px; }
+    }
+    .sub{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.6;
+      max-width: 52ch;
+    }
+    .actions{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    button, .btn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-weight:700;
+      color: #0b0b14;
+      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      user-select:none;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    .btnPrimary{
+      background: linear-gradient(135deg, var(--pink), var(--red));
+      color: #0b0b14;
+    }
+    .btnGhost{
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+    }
+    .btnGold{
+      background: linear-gradient(135deg, var(--gold), #ffdca0);
+    }
+    .tiny{
+      font-size:12px; color:var(--muted);
+    }
 
-.primary{
-    background:#ff4fd8;
-    color:black;
-}
-.secondary{
-    background:#ffffff22;
-    color:white;
-}
+    .heroRight{
+      padding:22px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .mini{
+      padding:16px;
+      border-radius:18px;
+      border:1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+    }
+    .miniTitle{ font-weight:800; margin:0 0 8px; }
+    .miniText{ margin:0; color:var(--muted); line-height:1.6; font-size:13px; }
 
-h1,h2{margin-top:0}
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    @media (max-width: 900px){ .grid3{ grid-template-columns: 1fr; } }
+    .tile{
+      padding:16px;
+      border-radius:18px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .tile h3{ margin:0 0 6px; }
+    .tile p{ margin:0; color:var(--muted); font-size:13px; line-height:1.6; }
 
-/* Gallery */
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:10px;
-}
-.gallery img{
-    width:100%;
-    border-radius:12px;
-    cursor:pointer;
-}
+    .divider{
+      height:1px; background: rgba(255,255,255,.1);
+      margin: 18px 0;
+    }
 
-/* Quiz */
-.option{
-    background:#ffffff22;
-    padding:10px;
-    border-radius:10px;
-    margin:6px;
-    cursor:pointer;
-}
-.correct{
-    background:#38ef7d55;
-}
+    .centerTitle{
+      display:flex; align-items:end; justify-content:space-between; gap:10px;
+      margin-bottom: 10px;
+    }
+    .centerTitle h2{
+      margin:0;
+      font-size:26px;
+      letter-spacing:-.4px;
+    }
 
-/* Modal */
-#modal{
-    display:none;
-    position:fixed;
-    top:0;left:0;right:0;bottom:0;
-    background:black;
-    align-items:center;
-    justify-content:center;
-}
-#modal img{
-    max-width:90%;
-    max-height:90%;
-}
+    /* Quiz */
+    .quizWrap{ padding:18px; }
+    .q{
+      padding:14px;
+      border-radius:16px;
+      background: rgba(0,0,0,.2);
+      border:1px solid rgba(255,255,255,.1);
+      margin:10px 0;
+    }
+    .q strong{ display:block; margin-bottom:8px; }
+    .opts{ display:flex; flex-wrap:wrap; gap:8px; }
+    .opt{
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius: 14px;
+      font-weight:700;
+      font-size:13px;
+    }
+    .opt.selected{
+      background: rgba(56,239,125,.18);
+      border-color: rgba(56,239,125,.35);
+    }
 
-/* Reveal */
-#secret{
-    display:none;
-    background:#ffffff11;
-    padding:20px;
-    border-radius:12px;
-}
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 900px){ .gallery{ grid-template-columns: repeat(2, 1fr);} }
+    .shot{
+      position:relative;
+      overflow:hidden;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      cursor:pointer;
+      aspect-ratio: 1 / 1;
+    }
+    .shot img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+      transform: scale(1.03);
+      transition: transform .25s ease;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .shot:hover img{ transform: scale(1.08); }
 
-</style>
+    /* Modal */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.72);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+      padding:18px;
+    }
+    .modal.open{ display:flex; }
+    .modalInner{
+      max-width: 980px;
+      width:100%;
+      background: rgba(15,15,25,.92);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 22px;
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      position:relative;
+    }
+    .modalInner img{
+      width:100%;
+      max-height: 80vh;
+      object-fit:contain;
+      display:block;
+      background: rgba(0,0,0,.35);
+    }
+    .close{
+      position:absolute; top:10px; right:10px;
+      border-radius: 14px;
+      padding:10px 12px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      font-weight:800;
+    }
+
+    /* Reveal */
+    .reveal{
+      padding:22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+    }
+    .reveal h2{ margin:0 0 10px; font-size:30px; }
+    .big{
+      font-size:16px;
+      color: var(--muted);
+      line-height:1.75;
+      max-width: 62ch;
+      margin: 0 auto 14px;
+    }
+    .secretBox{
+      margin: 14px auto 0;
+      max-width: 760px;
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      text-align:left;
+    }
+    .secretBox strong{ color: #fff; }
+    .hint{ color: var(--muted); font-size: 12px; }
+
+    footer{
+      padding: 30px 18px 45px;
+      text-align:center;
+      color: rgba(255,255,255,.55);
+      font-size:12px;
+    }
+
+    /* The “No” button trick */
+    .noBtn{
+      position:relative;
+    }
+
+    /* Confetti canvas */
+    #confetti{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index: 998;
+    }
+  </style>
 </head>
 
 <body>
+  <canvas id="confetti"></canvas>
 
-<!-- Floating hearts generator -->
-<script>
-setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerText="💖";
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(15+Math.random()*20)+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),8000);
-},500);
-</script>
+  <div class="hearts" id="hearts"></div>
 
-<section class="card">
-<h1>Hi Anubhuti 👀</h1>
-<p>
-I built something small but personal… because that’s us.  
-Play along till the end 😄
-</p>
+  <header>
+    <div class="nav">
+      <div class="brand">
+        <span style="font-size:18px">💘</span>
+        <span>For <span id="herNameNav">Her</span></span>
+        <span class="pill" id="datePill">Valentine Mode</span>
+      </div>
+      <nav style="display:flex; gap:6px; align-items:center;">
+        <a href="#quiz">Quiz</a>
+        <a href="#memories">Memories</a>
+        <a href="#reveal">Final Reveal</a>
+        <button class="btnGhost" id="musicBtn" title="Toggle music">🎵 Music: Off</button>
+      </nav>
+    </div>
+  </header>
 
-<button class="primary" onclick="scrollToQuiz()">Start</button>
-<button class="secondary" onclick="alert('Locked in 😄')">Yes I'm your Valentine 💖</button>
-<button class="secondary" onmouseover="moveNo(this)">No 🙃</button>
-</section>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card heroLeft">
+        <div class="glow"></div>
+        <h1>
+          Hi <span id="herName">Anubhuti</span> 👀<br/>
+          I built you a tiny universe.
+        </h1>
+        <p class="sub">
+          This is not a normal Valentine page. It’s a playful little “game” that ends with a grand surprise.
+          Ready? Don’t scroll too fast 😄
+        </p>
 
-<section id="quiz" class="card">
-<h2>Mini Relationship Quiz</h2>
+        <div class="actions">
+          <button class="btnPrimary" id="startBtn">Start the Surprise ✨</button>
+          <button class="btnGhost" id="valBtnYes">Yes, I’m your Valentine 💖</button>
+          <button class="btnGhost noBtn" id="valBtnNo">No 🙃</button>
+        </div>
 
-<div class="option" onclick="correct(this)">Our intense sessions 💭</div>
-<div class="option" onclick="correct(this)">Our parties 🎉</div>
-<div class="option" onclick="correct(this)">Car rides with music 🚗🎶</div>
+        <div class="divider"></div>
 
-<button class="primary" onclick="unlock()">Unlock Surprise</button>
-</section>
+        <div class="grid3">
+          <div class="tile">
+            <h3>🎯 Mission</h3>
+            <p>Finish the quiz, unlock the reveal, and claim your prize.</p>
+          </div>
+          <div class="tile">
+            <h3>🧠 Difficulty</h3>
+            <p>Easy. Because you’re the genius here. I’m just the simp with a keyboard.</p>
+          </div>
+          <div class="tile">
+            <h3>🔒 Privacy</h3>
+            <p>It’s just a link. No login. No data stored. Only vibes.</p>
+          </div>
+        </div>
 
-<section class="card">
-<h2>Memories</h2>
+        <p class="tiny" style="margin-top:14px;">
+          Tip: If you’re viewing this at dinner, turn on music 😉
+        </p>
+      </div>
 
-<p>Upload your photos to GitHub and name them:</p>
-<p><b>photos/1.jpg photos/2.jpg photos/3.jpg photos/4.jpg</b></p>
+      <div class="card heroRight">
+        <div class="mini">
+          <p class="miniTitle">💌 A note from <span id="yourName1">Akhil</span></p>
+          <p class="miniText" id="noteText">
+            I wanted to do something that feels “us” — fun, personal, and a little extra.
+            So I made this. Keep going till the end 😄
+          </p>
+        </div>
 
-<div class="gallery">
-<img src="photos/1.jpg" onclick="show(this)">
-<img src="photos/2.jpg" onclick="show(this)">
-<img src="photos/3.jpg" onclick="show(this)">
-<img src="photos/4.jpg" onclick="show(this)">
-</div>
+        <div class="mini">
+          <p class="miniTitle">⏳ Countdown (manual)</p>
+          <p class="miniText">
+            The surprise unlocks when you press <b>Final Reveal</b>.
+          </p>
+          <p class="miniText hint">Want a real countdown? Tell me and I’ll add it.</p>
+        </div>
 
-</section>
+        <div class="mini">
+          <p class="miniTitle">🗺️ “Us” highlights</p>
+          <p class="miniText" id="highlights">
+            • Our intense sessions 💭<br/>
+            • Our parties & chaos mode 🎉<br/>
+            • Car rides with music 🚗🎶<br/>
+            • Office moments only we understand 😄
+          </p>
+        </div>
+      </div>
+    </section>
 
-<section class="card">
-<h2>Final Reveal</h2>
+    <!-- QUIZ -->
+    <section id="quiz" class="card quizWrap">
+      <div class="centerTitle">
+        <h2>🎮 Mini Relationship Quiz</h2>
+        <span class="pill" id="scorePill">Score: 0/3</span>
+      </div>
+      <p class="sub" style="margin-top:0">
+        Answer these 3 questions to unlock the final surprise button.
+      </p>
 
-<button class="primary" onclick="reveal()">Open Surprise</button>
+      <div class="q" data-q="0">
+        <strong>1) What’s my favorite way to annoy you?</strong>
+        <div class="opts">
+          <button class="opt" data-correct="0">Stealing your fries</button>
+          <button class="opt" data-correct="1">Saying “one last thing…” 17 times</button>
+          <button class="opt" data-correct="0">Sending 9 voice notes</button>
+        </div>
+      </div>
 
-<div id="secret">
-<p>
-When I come to India next…  
-I’m planning something special for us.  
-Proper time together.  
-No distractions.  
-Just us.
-</p>
+      <div class="q" data-q="1">
+        <strong>2) Pick our vibe:</strong>
+        <div class="opts">
+          <button class="opt" data-correct="0">CEO & CFO energy</button>
+          <button class="opt" data-correct="1">Best friends who flirt</button>
+          <button class="opt" data-correct="0">Two characters in a rom-com</button>
+        </div>
+      </div>
 
-<p>
-— Akhil ❤️
-</p>
-</div>
-</section>
+      <div class="q" data-q="2">
+        <strong>3) What’s the correct answer to “Do you know how much I love you?”</strong>
+        <div class="opts">
+          <button class="opt" data-correct="0">Normal amount</button>
+          <button class="opt" data-correct="0">Not sure</button>
+          <button class="opt" data-correct="1">Infinity. And then some.</button>
+        </div>
+      </div>
 
-<div id="modal" onclick="this.style.display='none'">
-<img id="big">
-</div>
+      <div class="actions">
+        <button class="btnGold" id="unlockBtn" disabled title="Finish the quiz first">
+          🔓 Unlock Final Reveal
+        </button>
+        <span class="tiny" id="unlockHint">Finish all 3 to unlock.</span>
+      </div>
+    </section>
 
-<script>
+    <!-- MEMORIES -->
+    <section id="memories" class="card" style="padding:18px;">
+      <div class="centerTitle">
+        <h2>📸 Our Memories</h2>
+        <span class="pill">Tap a photo</span>
+      </div>
+      <p class="sub" style="margin-top:0">
+        Upload your photos to GitHub in a folder named <b>photos</b>, and name them exactly like this:
+        <b>1.jpg, 2.jpg, 3.jpg, 4.jpg, 5.jpg, 6.jpg, 7.jpg, 8.jpg</b>.
+      </p>
 
-function scrollToQuiz(){
-document.getElementById("quiz").scrollIntoView({behavior:"smooth"});
-}
+      <div class="gallery" id="gallery">
+        <!-- Your photos (local) -->
+        <div class="shot"><img alt="Memory 1" src="photos/1.jpg"></div>
+        <div class="shot"><img alt="Memory 2" src="photos/2.jpg"></div>
+        <div class="shot"><img alt="Memory 3" src="photos/3.jpg"></div>
+        <div class="shot"><img alt="Memory 4" src="photos/4.jpg"></div>
+        <div class="shot"><img alt="Memory 5" src="photos/5.jpg"></div>
+        <div class="shot"><img alt="Memory 6" src="photos/6.jpg"></div>
+        <div class="shot"><img alt="Memory 7" src="photos/7.jpg"></div>
+        <div class="shot"><img alt="Memory 8" src="photos/8.jpg"></div>
+      </div>
 
-function moveNo(btn){
-btn.style.position="relative";
-btn.style.left=(Math.random()*200-100)+"px";
-btn.style.top=(Math.random()*100-50)+"px";
-}
+      <div class="divider"></div>
 
-function correct(el){
-el.classList.add("correct");
-}
+      <div class="grid3">
+        <div class="tile">
+          <h3>💖 Reasons I love you</h3>
+          <p id="reasons">
+            • You make intense days feel lighter.<br/>
+            • Your presence turns “work mode” into “fun mode.”<br/>
+            • You’re the calm + the chaos, perfectly.
+          </p>
+        </div>
+        <div class="tile">
+          <h3>🧠 Inside jokes</h3>
+          <p id="jokes">
+            • “One last thing…” (and it’s never last) 😄<br/>
+            • Our party stories that should never leave us 🤫<br/>
+            • That one car ride playlist moment 🎶
+          </p>
+        </div>
+        <div class="tile">
+          <h3>🧭 Next adventure</h3>
+          <p id="nextAdventure">
+            • My next visit to India 🇮🇳<br/>
+            • Time together, no rushing<br/>
+            • A plan I’m not telling you yet 😈
+          </p>
+        </div>
+      </div>
 
-function unlock(){
-alert("Surprise unlocked 😄");
-}
+      <p class="tiny" style="margin-top:14px;">
+        If you want, I can add a “timeline of us” section too (super romantic).
+      </p>
+    </section>
 
-function reveal(){
-document.getElementById("secret").style.display="block";
-}
+    <!-- REVEAL -->
+    <section id="reveal" class="card reveal">
+      <h2>🎁 Final Reveal</h2>
+      <p class="big">
+        This button stays locked until you finish the quiz.
+        When it unlocks… don’t scream. (Actually scream. I like that.)
+      </p>
 
-function show(img){
-document.getElementById("modal").style.display="flex";
-document.getElementById("big").src=img.src;
-}
+      <div class="actions" style="justify-content:center;">
+        <button class="btnPrimary" id="revealBtn" disabled>Open the Surprise 💥</button>
+      </div>
 
-</script>
+      <div class="secretBox" id="secretBox" style="display:none;">
+        <p style="margin:0 0 8px;">
+          <strong>Surprise Plan:</strong>
+          <span id="surpriseText"></span>
+        </p>
+        <p style="margin:0;">
+          <strong>Dress code:</strong> <span id="dressCode">Your usual stunning self ✨</span><br/>
+          <strong>When:</strong> <span id="timeText">When I land 😉</span><br/>
+          <strong>One rule:</strong> <span id="ruleText">You don’t get to overthink this 😄</span>
+        </p>
+        <p class="hint" style="margin-top:10px;">
+          (Yes, I’m being dramatic on purpose.)
+        </p>
+      </div>
+    </section>
 
+  </main>
+
+  <footer>
+    Made with love, mischief, and an unreasonable amount of overthinking 💘 — Akhil
+  </footer>
+
+  <!-- Image Modal -->
+  <div class="modal" id="modal">
+    <div class="modalInner">
+      <button class="close" id="closeModal">✕ Close</button>
+      <img id="modalImg" alt="Expanded memory">
+    </div>
+  </div>
+
+  <!-- Optional audio -->
+  <audio id="bgm" loop>
+    <!-- To enable music:
+         1) Create a folder named "music"
+         2) Upload your MP3 as "music.mp3" inside it
+         3) Uncomment the line below -->
+    <!-- <source src="music/music.mp3" type="audio/mpeg"> -->
+  </audio>
+
+  <script>
+    /***************
+     * QUICK CUSTOMIZE (already set for you)
+     ***************/
+    const CONFIG = {
+      herName: "Anubhuti",
+      yourName: "Akhil",
+      dateLabel: "Akhil ❤️ Anubhuti",
+      noteText: "I wanted something fun, personal, and a little extra — because that’s us. So I built this tiny universe for you. Don’t stop till the end 😄",
+      highlightsHTML: `
+        • Our intense sessions 💭<br/>
+        • Our parties & chaos mode 🎉<br/>
+        • Car rides with music 🚗🎶<br/>
+        • Office moments only we understand 😄
+      `,
+      reveal: {
+        place: "my next visit to India",
+        surprise: "I’m planning something special — proper time together, no rushing, no distractions. Just us.",
+        dressCode: "Your usual stunning self ✨",
+        time: "When I land 😉",
+        rule: "You don’t get to overthink this 😄"
+      }
+    };
+
+    // Apply config to UI
+    document.getElementById("herName").textContent = CONFIG.herName;
+    document.getElementById("herNameNav").textContent = CONFIG.herName;
+    document.getElementById("yourName1").textContent = CONFIG.yourName;
+    document.getElementById("datePill").textContent = CONFIG.dateLabel;
+    document.getElementById("noteText").textContent = CONFIG.noteText;
+    document.getElementById("highlights").innerHTML = CONFIG.highlightsHTML;
+
+    /***************
+     * FLOATING HEARTS
+     ***************/
+    const heartsWrap = document.getElementById("hearts");
+    const heartEmojis = ["💗","💖","💘","💝","💞","💕","❤️"];
+    function spawnHeart(){
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.textContent = heartEmojis[Math.floor(Math.random()*heartEmojis.length)];
+      const left = Math.random()*100;
+      const dur = 8 + Math.random()*10;
+      const size = 14 + Math.random()*18;
+      h.style.left = left + "vw";
+      h.style.bottom = "-40px";
+      h.style.fontSize = size + "px";
+      h.style.animationDuration = dur + "s";
+      h.style.animationDelay = (Math.random()*2) + "s";
+      heartsWrap.appendChild(h);
+      setTimeout(()=> h.remove(), (dur+3)*1000);
+    }
+    for(let i=0;i<18;i++) setTimeout(spawnHeart, i*250);
+    setInterval(spawnHeart, 650);
+
+    /***************
+     * START BUTTON SCROLL
+     ***************/
+    document.getElementById("startBtn").addEventListener("click", ()=>{
+      document.getElementById("quiz").scrollIntoView({behavior:"smooth", block:"start"});
+      burstConfetti();
+    });
+
+    /***************
+     * "NO" BUTTON RUNS AWAY
+     ***************/
+    const noBtn = document.getElementById("valBtnNo");
+    let noMoves = 0;
+    function moveNoBtn(){
+      noMoves++;
+      const dx = (Math.random()*220 - 110);
+      const dy = (Math.random()*140 - 70);
+      noBtn.style.transform = `translate(${dx}px, ${dy}px) rotate(${(Math.random()*10-5)}deg)`;
+      if(noMoves >= 6){
+        noBtn.textContent = "Okay fine 😭";
+      }
+    }
+    noBtn.addEventListener("mouseenter", moveNoBtn);
+    noBtn.addEventListener("click", moveNoBtn);
+
+    document.getElementById("valBtnYes").addEventListener("click", ()=>{
+      burstConfetti();
+      alert(`Yay 😄 Officially locked in, ${CONFIG.herName} 💖`);
+    });
+
+    /***************
+     * QUIZ LOGIC
+     ***************/
+    const scorePill = document.getElementById("scorePill");
+    const unlockBtn = document.getElementById("unlockBtn");
+    const unlockHint = document.getElementById("unlockHint");
+    const revealBtn = document.getElementById("revealBtn");
+
+    const answers = [null, null, null];
+    function updateScore(){
+      const score = answers.filter(Boolean).length;
+      scorePill.textContent = `Score: ${score}/3`;
+      const done = answers.every(v => v !== null);
+      const perfect = answers.every(v => v === true);
+
+      unlockBtn.disabled = !(done && perfect);
+      unlockBtn.title = unlockBtn.disabled ? "Get all correct to unlock 😄" : "Unlocked!";
+      unlockHint.textContent = done
+        ? (perfect ? "Perfect score 😤 ✅" : "So close… try again for 3/3 😄")
+        : "Finish all 3 to unlock.";
+
+      revealBtn.disabled = unlockBtn.disabled;
+    }
+
+    document.querySelectorAll(".q").forEach(qEl=>{
+      const qIndex = Number(qEl.dataset.q);
+      qEl.querySelectorAll(".opt").forEach(opt=>{
+        opt.addEventListener("click", ()=>{
+          qEl.querySelectorAll(".opt").forEach(o=> o.classList.remove("selected"));
+          opt.classList.add("selected");
+
+          const isCorrect = opt.dataset.correct === "1";
+          answers[qIndex] = isCorrect;
+
+          updateScore();
+          if(isCorrect) burstConfetti(35);
+        });
+      });
+    });
+
+    unlockBtn.addEventListener("click", ()=>{
+      burstConfetti();
+      document.getElementById("reveal").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    /***************
+     * REVEAL
+     ***************/
+    const secretBox = document.getElementById("secretBox");
+    document.getElementById("revealBtn").addEventListener("click", ()=>{
+      document.getElementById("surpriseText").innerHTML =
+        `When I’m in India next, I’m stealing you for something special. <b>No rushing, no distractions.</b> ` +
+        `Just us — and a plan I’m not telling you yet 😈`;
+
+      document.getElementById("dressCode").textContent = CONFIG.reveal.dressCode;
+      document.getElementById("timeText").textContent = CONFIG.reveal.time;
+      document.getElementById("ruleText").textContent = CONFIG.reveal.rule;
+
+      secretBox.style.display = "block";
+      burstConfetti(220);
+      pulseTitle("🎁 Surprise Unlocked!");
+    });
+
+    function pulseTitle(text){
+      const pill = document.getElementById("datePill");
+      pill.textContent = text;
+      pill.style.background = "rgba(56,239,125,.18)";
+      pill.style.borderColor = "rgba(56,239,125,.35)";
+      setTimeout(()=>{
+        pill.textContent = CONFIG.dateLabel;
+        pill.style.background = "rgba(255,255,255,.08)";
+        pill.style.borderColor = "rgba(255,255,255,.12)";
+      }, 3000);
+    }
+
+    /***************
+     * GALLERY MODAL
+     ***************/
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modalImg");
+    document.getElementById("closeModal").addEventListener("click", ()=> modal.classList.remove("open"));
+    modal.addEventListener("click", (e)=> { if(e.target === modal) modal.classList.remove("open"); });
+
+    document.querySelectorAll(".shot img").forEach(img=>{
+      img.addEventListener("click", ()=>{
+        modalImg.src = img.src;
+        modal.classList.add("open");
+      });
+    });
+
+    /***************
+     * MUSIC TOGGLE (optional)
+     ***************/
+    const bgm = document.getElementById("bgm");
+    const musicBtn = document.getElementById("musicBtn");
+    let musicOn = false;
+
+    musicBtn.addEventListener("click", async ()=>{
+      if(!bgm.querySelector("source")){
+        alert("To enable music: upload music/music.mp3 and uncomment the <source> line in the code 🎵");
+        return;
+      }
+      try{
+        if(!musicOn){
+          await bgm.play();
+          musicOn = true;
+          musicBtn.textContent = "🎵 Music: On";
+          burstConfetti(40);
+        } else {
+          bgm.pause();
+          musicOn = false;
+          musicBtn.textContent = "🎵 Music: Off";
+        }
+      }catch(err){
+        console.log(err);
+        alert("Audio blocked by browser. Try clicking again.");
+      }
+    });
+
+    /***************
+     * CONFETTI (simple canvas)
+     ***************/
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let W, H;
+    function resize(){
+      W = canvas.width = window.innerWidth * devicePixelRatio;
+      H = canvas.height = window.innerHeight * devicePixelRatio;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    let particles = [];
+    function burstConfetti(count=120){
+      const cx = W/2, cy = H/3;
+      for(let i=0;i<count;i++){
+        particles.push({
+          x: cx + (Math.random()*140-70)*devicePixelRatio,
+          y: cy + (Math.random()*80-40)*devicePixelRatio,
+          vx: (Math.random()*8-4)*devicePixelRatio,
+          vy: (Math.random()*-10-3)*devicePixelRatio,
+          g: (0.18 + Math.random()*0.18)*devicePixelRatio,
+          r: (2 + Math.random()*4)*devicePixelRatio,
+          a: 1,
+          rot: Math.random()*Math.PI,
+          vr: (Math.random()*0.2-0.1)
+        });
+      }
+    }
+
+    function tick(){
+      ctx.clearRect(0,0,W,H);
+      particles = particles.filter(p => p.a > 0);
+      for(const p of particles){
+        p.vy += p.g;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rot += p.vr;
+        p.a -= 0.008;
+
+        ctx.save();
+        ctx.globalAlpha = Math.max(p.a,0);
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.fillStyle = "white";
+        ctx.fillRect(-p.r*2, -p.r, p.r*4, p.r*2);
+        ctx.restore();
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+    setTimeout(()=> burstConfetti(25), 900);
+  </script>
 </body>
 </html>
